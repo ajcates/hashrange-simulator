@@ -37,7 +37,8 @@ $(document)
       var updatePlansAvailable = function() {
         var newPlansAvailable = [];
         $("#plansAvailable > div").forEach(function(p){
-          var nameo = $(p).find("h4").text();
+          var nameo = $(p).find("h4").text().split(" ").map(function(i){return i.slice(0,3)}).join("");
+          
           newPlansAvailable[nameo] = {
             profit: $(p).find(".profit").val(),
             days: $(p).find(".days").val(),
@@ -80,7 +81,10 @@ $(document)
       var a = new Big(0);
     
       var totalSpent = 0;
-      var myPlans = [
+      
+      var myPlans = window.localStorage.getItem('myPlans');
+      if(myPlans == null) {
+        var myPlans = [
 ['BegV3', 90], 
 ['BegV3', 85], 
 ['BegV3', 82], 
@@ -95,21 +99,39 @@ $(document)
 ['BegV3', 67], 
 ['BegV3', 64]
        ];
+      }
+      
+      var myPlansBeforeSave = myPlans;
+      
+      $("#myPlans").on("focus", function() {
+        myPlansBeforeSave = $(this).val();
+      }).text(JSON.stringify(myPlans));
+     // ("#myPlans").val
+      $("#saveMyPlans").on('click', function() {
+        try {
+          myPlans = JSON.parse($("#myPlans").val());
+          console.log(myPlans);
+          window.localStorage.setItem("myPlans", myPlans);
+        }
+        catch (e) {
+          alert("Unexpected value in JSON." + e.message); 
+        }
+      });
        
-       
-       var days = 0;
-       var csvdata = "day,plans,newplans,droppedplans,profit,spent,wallet usd,totalSpent,btcprice";
-       var simulateDay = function () {
+      var days = 0;
+      var csvdata = "day,plans,newplans,droppedplans,profit,spent,wallet usd,totalSpent,btcprice";
+      var simulateDay = function () {
         days++;
 
-   //    csvdata = csvdata + "\n" + days +","+  + ",";
+      //csvdata = csvdata + "\n" + days +","+  + ",";
        
-       var rand = Math.random();
+      var rand = Math.random();
        
-    //  if (days % 3 == 0) {
-         //wallet.plus(usd2btc(5));
-     //  }
-      // console.log(rand)
+      //if (days % 3 == 0) {
+        //wallet.plus(usd2btc(5));
+      //}
+      //console.log(rand)
+      
       if($("#adjustBTC").is(":checked")) {
        if (rand > .30) {
          if(rand > .62) {
@@ -227,6 +249,7 @@ $(document)
            $(this).html("<i class=\"play icon\"></i>Play");
           // console.log(csvdata);
            $("#csvdata").text(csvdata);
+           $("#myPlans").text(JSON.stringify(myPlans));
            clearInterval(simulator);
          }
          
@@ -254,8 +277,10 @@ $(document)
            }
          }
          myPlans = newPlans;
+         window.localStorage.setItem("myPlans", myPlans);
+         $("#myPlans").text(JSON.stringify(myPlans));
          console.log(newPlans);
-       })
+       });
       //setInterval(simulateDay, 1000);
        
        
@@ -349,8 +374,15 @@ Price: $13
     </div>
     <div class="ui segment">
       <h3 class="ui label left attached">Current Plans</h3>
-      <ul id="currentPlans">
-      </ul>
+      <div class="ui segment form">
+        <div class="ui field">
+          <textarea id="myPlans" rows="10"></textarea>
+        </div>
+        <div class="ui segment">
+          <button class="large fluid labeled icon centered button" id="saveMyPlans"><i class="save icon"></i>Save</button>
+        </div>
+      </div>
+      
     </div>
       <div id="plansAvailable" class="ui segments">
         <h3 class="ui label left attached">Plans Available</h3>
@@ -420,7 +452,7 @@ Price: $13
       <div class="ui form">
         <h3 class="label attached left">Import Plans</h3>
         <div class="field">
-          <label for="csvdata" class="label attached">Go select all, then copy on hashrange.com > My Offline Miners</label>
+          <label for="csvdata" class="label attached">Go select all, then copy on hashrange.com > My Offline Miners, then in the text. field below go select all, then paste.</label>
           <textarea placeholder="Paste here." rows="4" id="importdata">
             My Offline Miners
 Bitcoin 
