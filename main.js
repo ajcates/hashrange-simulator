@@ -139,9 +139,9 @@ $(document)
        //console.log(btcprice);
        $("#btcprice").text("₿ = $" + btcprice.toFixed(2));
      
-      if($("#adjustProfit").is(":checked") && days % 7 == 0) {
+      if($("#adjustProfit").is(":checked") && days % 14 == 0) {
         for(i in plansAvailable) {
-          plansAvailable[i]["profit"] = plansAvailable[i]["profit"].times(.998);
+          plansAvailable[i]["profit"] = plansAvailable[i]["profit"].times(.981);
         }
       }
       
