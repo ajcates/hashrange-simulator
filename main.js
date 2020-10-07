@@ -61,6 +61,23 @@ $(document)
       var a = new Big(0);
     
       var totalSpent = 0;
+
+      var planPurchasePiroty = localStorage.getItem('planPurchasePiroty');
+      if(planPurchasePiroty == null) {
+        planPurchasePiroty = $("#planPiroty").val()
+      }
+      var purchasePiroty = planPurchasePiroty.split(',').filter(function (x) {
+        plansAvailable.hasOwnProperty(x);
+      });
+      $("#planPiroty").val(planPurchasePiroty).on('change', function() {
+        
+        purchasePiroty = $('#planPiroty').val().split(',').filter(function (x) {
+        plansAvailable.hasOwnProperty(x);
+      });
+        localStorage.setItem('planPurchasePiroty', purchasePiroty.join(','));
+      }).on('blur', function() {
+        $("#planPiroty").val(purchasePiroty.join(','));
+      });
       
       var myPlans = JSON.parse(localStorage.getItem('myPlans'));
       if(myPlans == null) {
@@ -175,9 +192,11 @@ $(document)
             myPlans.push([p, plansAvailable[p]["days"]]);
             return true;
           } else {
-         return false;
+         return false;           
           }
         }
+        purchasePiroty.forEach(buyPlan);
+
         //buyPlan("basic");
         //var buyPlans = function(planType, count)
         
@@ -185,11 +204,11 @@ $(document)
      //   buyPlans("beg", 1);
      
      
-        buyPlan("BasV4");
+        //buyPlan("BasV4");
       //  buyPlan("BasV4");
-        buyPlan("BegV4");
-        buyPlan("BegV4");
-        buyPlan("BegV4");
+        //buyPlan("BegV4");
+        //buyPlan("BegV4");
+        //buyPlan("BegV4");
       //  buyPlan("BasV3")
        // buyPlan("BegV3");
      //   buyPlan("BegV4");
