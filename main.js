@@ -66,14 +66,15 @@ $(document)
       if(planPurchasePiroty == null) {
         planPurchasePiroty = $("#planPiroty").val()
       }
+      console.log(planPurchasePiroty)
       var purchasePiroty = planPurchasePiroty.split(',').filter(function (x) {
-        plansAvailable.hasOwnProperty(x);
+          return plansAvailable.hasOwnProperty(x);
       });
       $("#planPiroty").val(planPurchasePiroty).on('change', function() {
         
         purchasePiroty = $('#planPiroty').val().split(',').filter(function (x) {
-        plansAvailable.hasOwnProperty(x);
-      });
+           return plansAvailable.hasOwnProperty(x);
+        });
         localStorage.setItem('planPurchasePiroty', purchasePiroty.join(','));
       }).on('blur', function() {
         $("#planPiroty").val(purchasePiroty.join(','));
