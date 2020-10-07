@@ -13,7 +13,7 @@ $(document)
         return us.div(btcprice);
       }
       
-      var wallet = new Big(0.00013);
+      var wallet = new Big(0.0);
       var updatePlansAvailable = function() {
         var newPlansAvailable = [];
         $("#plansAvailable > div").forEach(function(p){
@@ -258,8 +258,9 @@ $(document)
            }
          }
          myPlans = newPlans;
-         window.localStorage.setItem("myPlans", myPlans);
          $("#myPlans").text(JSON.stringify(myPlans));
+         $("#saveMyPlans").click();
+         alert(myPlans.length + " plans imported.")
          console.log(newPlans);
        });
       //setInterval(simulateDay, 1000);

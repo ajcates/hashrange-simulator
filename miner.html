@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <title>Semantic UI Homepage</title>
+  <title>Simulator for hashrange</title>
   
   <!-- Semantic UI -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css">
@@ -38,20 +38,20 @@
      
       <div class="ui middle text container">
         <div class="ui inverted segment">
-          <h4 class="ui label left attached">Simulator</h4>
+          <h4 class="ui label top attached">Simulator</h4>
           <h1 id="day" class="ui">Day 0</h1>
           <h3 id="wallet" class="ui inverted header">₿ 0.0</h3>
           <h3 class="ui" id="walletusd">$ 0</h3>
         </div>
         <div class="ui inverted segment">
-          <h4 class="ui label left attached">Balances</h4>
+          <h4 class="ui label top attached">Balances</h4>
           <h4 class="ui" id="addbtc">+ $0</h4>    
           <h4 class="ui" id="minusbtc">- $0</h4>    
         
           <h3 id="made">= $0 made on day 0</h3>
         </div>
         <div class="ui inverted segment">
-           <h4 class="ui label left attached">Totals</h4>
+          <h4 class="ui label left attached">Totals</h4>
           <h3 id="totalSpent">Total Spent: $0</h3>
           <h3 class="ui" id="plans">Plans: 0</h3>
         </div>
@@ -62,6 +62,12 @@
           <label for="adjustBTC">Adjust BTC</label>
           <hr />
           <p id="btcprice" class="label">1 btc = 🌜</p>
+        </div>
+      </div>
+      <div class="ui segment">
+        <h4 class="ui label top attached">Plan purchase piroty</h4>
+        <div class="ui input fluid">
+          <input type="text" id="planPiroty" value="BasV4,BegV4,BegV4,BegV4" />
         </div>
       </div>
       <div class="ui segment invert">
@@ -81,7 +87,7 @@
       
     </div>
       <div id="plansAvailable" class="ui segments">
-        <h3 class="ui label left attached">Plans Available</h3>
+        <h3 class="ui label top attached">Plans Available</h3>
         <div id="availableplan_test" class="ui segment">
           <h4>Test</h4>
           <h5>$5</h5>
@@ -146,9 +152,9 @@
     <div class="ui segment">
       
       <div class="ui form">
-        <h3 class="label attached left">Import Plans</h3>
+        <h3 class="label attached top">Import Plans</h3>
         <div class="field">
-          <label for="csvdata" class="label attached">Go select all, then copy on <a href="https://hashrange.com/dashboard/user/plans">Hashrange.com > My Offline </a>, then in the text. field below paste then hit import.</label>
+          <label for="csvdata" class="label attached">Go select all, then copy on <a href="https://hashrange.com/dashboard/user/plans">Hashrange.com → My Offline </a>, then in the text. field below paste then hit import.</label>
           <textarea placeholder="Paste here." rows="4" id="importdata">
           </textarea>
         </div>
@@ -157,7 +163,7 @@
       <hr />
       <div class="ui form inverted">
         <div class="field">
-          <label for="csvdata" class="ui label bottom">CSV Data</label>
+          <label for="csvdata" class="ui label top attached">CSV Data</label>
           <textarea rows="3" id="csvdata"></textarea>
         </div>
       </div>
@@ -225,6 +231,5 @@
       </div>
     </div>
   </div>
-  
 </body>
 </html>
