@@ -2,7 +2,7 @@
 $(document)
     .ready(function() {
       
-      var btcprice = 10995;
+      var btcprice = 12778;
       
       var btc2usd = function(btc) {
         return btc.times(btcprice);
@@ -14,6 +14,9 @@ $(document)
       }
       
       var wallet = new Big(0.0);
+      $("#walletInput").on("change", function() {
+        wallet = new Big($("#walletInput").val());
+      })
       var updatePlansAvailable = function() {
         var newPlansAvailable = [];
         $("#plansAvailable > div").forEach(function(p){
@@ -29,12 +32,15 @@ $(document)
         console.log(newPlansAvailable);
       }
       //updatePlansAvailable();
+      //$("#")
       $("#plansAvailable input").on("change", updatePlansAvailable);
-      var plansAvailable = {
-        Test : {
-          profit: new Big(0.00000556),
-          days: 90,
-          priceUsd: 5
+      var plansAvailable = {};
+      updatePlansAvailable();
+      /*{
+        TestVx : {
+          profit: new Big(0.00000410),
+          profit: 30,
+          priceUsd: 1
         },
         BegV3: {
           profit: new Big(0.00001970),
@@ -42,7 +48,7 @@ $(document)
           costUsd: 13
         },
         BegV4: {
-          profit: new Big(0.00004146),
+          profit: new Big(0.00004174),
           days: 180,
           costUsd: 27
         },
@@ -52,16 +58,16 @@ $(document)
           costUsd: 128
         },
         BasV4: {
-          profit: new Big(0.00047236),
+          profit: new Big(0.00041742),
           days: 180,
           costUsd: 260
         }
       };
-      
+      */
       var a = new Big(0);
     
       var totalSpent = 0;
-
+      
       var planPurchasePiroty = localStorage.getItem('planPurchasePiroty');
       if(planPurchasePiroty == null) {
         planPurchasePiroty = $("#planPiroty").val()
