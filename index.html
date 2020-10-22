@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css">
   <link rel="stylesheet" href="css/page.css">
   <style>
+  body {
+    background: #333;
+  }
     
   </style>
   <script src="https://zeptojs.com/zepto.min.js"></script>
@@ -34,8 +37,6 @@
   <!-- Page Contents -->
   <div class="pusher">
     <div class="ui vertical masthead segment">
-      
-     
       <div class="ui middle text container">
         <div class="ui inverted segment">
           <h4 class="ui label left attached">Simulator</h4>
@@ -64,11 +65,17 @@
           <p id="btcprice" class="label">1 btc = 🌜</p>
         </div>
       </div>
-      <div class="ui segment invert">
+      <div class="ui text container segment middle invert">
         <button class="large fluid labeled icon centered button" id="play"><i class="play icon"></i>Play</button>
       </div>
+      <div class="ui text container segment">
+        <h4 class="ui label top attached">Plan purchase priority</h4>
+        <div class="ui input fluid">
+          <input type="text" id="planPiroty" value="BasV4,BegV4,BegV4,BegV4" />
+        </div>
+      </div>
     </div>
-    <div class="ui segment">
+    <div class="ui text segment container middle">
       <h3 class="ui label left attached">Current Plans</h3>
       <div class="ui segment form">
         <div class="ui field">
@@ -78,73 +85,71 @@
           <button class="large fluid labeled icon centered button" id="saveMyPlans"><i class="save icon"></i>Save</button>
         </div>
       </div>
-      
     </div>
-      <div id="plansAvailable" class="ui segments">
-        <h3 class="ui label left attached">Plans Available</h3>
-        <div id="availableplan_test" class="ui segment">
-          <h4>Test</h4>
-          <h5>$5</h5>
-          <div class="ui labeled input">
-            <div class="ui label">Daily Profit</div>
-            <input class="profit" type="text" value=".00000556" />
-          </div>
-          <div class="ui labeled input">
-            <div class="ui label">Days</div>
-            <input class="days" type="text" value="90" />
-          </div>
+    <div id="plansAvailable" class="ui text container segments">
+      <h3 class="ui label left attached">Plans Available</h3>
+      <div id="availableplan_test" class="ui segment">
+        <h4>Test</h4>
+        <h5>$5</h5>
+        <div class="ui labeled input">
+          <div class="ui label">Daily Profit</div>
+          <input class="profit" type="text" value=".00000556" />
         </div>
-        <div id="availableplan_BegV3" class="ui segment">
-          <h4>Beginner V3</h4>
-          <h5>$13</h5>
-          <div class="ui labeled input">
-            <div class="ui label">Daily Profit</div>
-            <input class="profit" type="text" value=".00002453" />
-          </div>
-          <div class="ui labeled input">
-            <div class="ui label">Days</div>
-            <input class="days" type="text" value="90" />
-          </div>
-        </div>
-        <div id="availableplan_BegV4" class="ui segment">
-          <h4>Beginner V4</h4>
-          <h5>$27</h5>
-          <div class="ui labeled input">
-            <div class="ui label">Daily Profit</div>
-            <input class="profit" type="text" value=".00004699" />
-          </div>
-          <div class="ui labeled input">
-            <div class="ui label">Days</div>
-            <input class="days" type="text" value="180" />
-          </div>
-        </div>
-        <div id="availableplan_BasV3" class="ui segment">
-          <h4>Basic V3</h4>
-          <h5>$128</h5>
-          <div class="ui labeled input">
-            <div class="ui label">Daily Profit</div>
-            <input class="profit" type="text" value=".00024527" />
-          </div>
-          <div class="ui labeled input">
-            <div class="ui label">Days</div>
-            <input class="days" type="text" value="90" />
-          </div>
-        </div>
-        <div id="availableplan_BasV4" class="ui segment">
-          <h4>Basic V4</h4>
-          <h5>$260</h5>
-          <div class="ui labeled input">
-            <div class="ui label">Daily Profit</div>
-            <input class="profit" type="text" value=".00046989" />
-          </div>
-          <div class="ui labeled input">
-            <div class="ui label">Days</div>
-            <input class="days" type="text" value="180" />
-          </div>
+        <div class="ui labeled input">
+          <div class="ui label">Days</div>
+          <input class="days" type="text" value="90" />
         </div>
       </div>
-    <div class="ui segment">
-      
+      <div id="availableplan_BegV3" class="ui segment">
+        <h4>Beginner V3</h4>
+        <h5>$13</h5>
+        <div class="ui labeled input">
+          <div class="ui label">Daily Profit</div>
+          <input class="profit" type="text" value=".00002453" />
+        </div>
+        <div class="ui labeled input">
+          <div class="ui label">Days</div>
+          <input class="days" type="text" value="90" />
+        </div>
+      </div>
+      <div id="availableplan_BegV4" class="ui segment">
+        <h4>Beginner V4</h4>
+        <h5>$27</h5>
+        <div class="ui labeled input">
+          <div class="ui label">Daily Profit</div>
+          <input class="profit" type="text" value=".00004699" />
+        </div>
+        <div class="ui labeled input">
+          <div class="ui label">Days</div>
+          <input class="days" type="text" value="180" />
+        </div>
+      </div>
+      <div id="availableplan_BasV3" class="ui segment">
+        <h4>Basic V3</h4>
+        <h5>$128</h5>
+        <div class="ui labeled input">
+          <div class="ui label">Daily Profit</div>
+          <input class="profit" type="text" value=".00024527" />
+        </div>
+        <div class="ui labeled input">
+          <div class="ui label">Days</div>
+          <input class="days" type="text" value="90" />
+        </div>
+      </div>
+      <div id="availableplan_BasV4" class="ui segment">
+        <h4>Basic V4</h4>
+        <h5>$260</h5>
+        <div class="ui labeled input">
+          <div class="ui label">Daily Profit</div>
+          <input class="profit" type="text" value=".00046989" />
+        </div>
+        <div class="ui labeled input">
+          <div class="ui label">Days</div>
+          <input class="days" type="text" value="180" />
+        </div>
+      </div>
+    </div>
+    <div class="ui text container segment">
       <div class="ui form">
         <h3 class="label attached left">Import Plans</h3>
         <div class="field">
@@ -162,69 +167,6 @@
         </div>
       </div>
     </div>
-    
-   
-    <div class="ui vertical stripe quote segment">
-      <div class="ui equal width stackable internally celled grid">
-        <div class="center aligned row">
-          <div class="column">
-            <h3>"What a Company"</h3>
-            <p>That is what they all say about us</p>
-          </div>
-          <div class="column">
-            <h3>"I shouldn't have gone with their competitor."</h3>
-            <p>
-              <img src="images/avatar.jpg" class="ui avatar image"> <b>Nan</b> Chief Fun Officer Acme Toys
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="ui vertical stripe segment">
-      <div class="ui text container">
-        <h3 class="ui header">Breaking The Grid, Grabs Your Attention</h3>
-        <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
-        <a class="ui large button">Read More</a>
-        <h4 class="ui horizontal header divider">
-          <a href="#">Case Studies</a>
-        </h4>
-        <h3 class="ui header">Did We Tell You About Our Bananas?</h3>
-        <p>Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but its really true. It took years of gene splicing and combinatory DNA research, but our bananas can really dance.</p>
-        <a class="ui large button">I am Still Quite Interested</a>
-      </div>
-    </div>
-    
-    
-    <div class="ui inverted vertical footer segment">
-      <div class="ui container">
-        <div class="ui stackable inverted divided equal height stackable grid">
-          <div class="three wide column">
-            <h4 class="ui inverted header">About</h4>
-            <div class="ui inverted link list">
-              <a href="#" class="item">Sitemap</a>
-              <a href="#" class="item">Contact Us</a>
-              <a href="#" class="item">Religious Ceremonies</a>
-              <a href="#" class="item">Gazebo Plans</a>
-            </div>
-          </div>
-          <div class="three wide column">
-            <h4 class="ui inverted header">Services</h4>
-            <div class="ui inverted link list">
-              <a href="#" class="item">Banana Pre-Order</a>
-              <a href="#" class="item">DNA FAQ</a>
-              <a href="#" class="item">How To Access</a>
-              <a href="#" class="item">Favorite X-Men</a>
-            </div>
-          </div>
-          <div class="seven wife column">
-            <h4 class="ui inverted header">Footer Header</h4>
-            <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-  
 </body>
 </html>

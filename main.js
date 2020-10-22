@@ -25,12 +25,12 @@ $(document)
           newPlansAvailable[nameo] = {
             profit: $(p).find(".profit").val(),
             days: $(p).find(".days").val(),
-            costUsd: $(p).find("h5").text()
+            costUsd: $(p).find("h5").text().slice(1)
           }
         });
         plansAvailable = newPlansAvailable;
         console.log(newPlansAvailable);
-      }
+      }                         
       //updatePlansAvailable();
       //$("#")
       $("#plansAvailable input").on("change", updatePlansAvailable);
@@ -190,6 +190,7 @@ $(document)
         var spent = 0;
         
         var buyPlan = function(p) {
+          console.log(plansAvailable[p]);
           if (usd2btc(plansAvailable[p]["costUsd"]).lt(wallet)) {
             spent += plansAvailable[p]["costUsd"];
             newPlans++;
