@@ -23,14 +23,14 @@ $(document)
           var nameo = $(p).find("h4").text().split(" ").map(function(i){return i.slice(0,3)}).join("");
           
           newPlansAvailable[nameo] = {
-            profit: $(p).find(".profit").val(),
-            days: $(p).find(".days").val(),
-            costUsd: $(p).find("h5").text().slice(1)
+            profit: new Big($(p).find(".profit").val()),
+            days: parseInt($(p).find(".days").val()),
+            costUsd: parseInt($(p).find("h5").text().slice(1))
           }
         });
         plansAvailable = newPlansAvailable;
         console.log(newPlansAvailable);
-      }                         
+      }
       //updatePlansAvailable();
       //$("#")
       $("#plansAvailable input").on("change", updatePlansAvailable);
@@ -138,39 +138,65 @@ $(document)
       //console.log(rand)
       
       if($("#adjustBTC").is(":checked")) {
-       if (rand > .30) {
-         if(rand > .62) {
-           if(rand > .83) {
-             btcprice *= 1.014
-           }
-         } else {
-           btcprice *= 1.0028
-         }
-       } else {
-         if(rand < .06) {
-           btcprice *= 0.97
-         } else {
-          
-           if(Math.random > .5) {
-             btcprice *= .997
-           } else {
-             btcprice *= 0.9990
-           }
-         }
-       }
+        if (rand > .38) {
+          if(rand > .68) {
+            if(rand > .82) {
+              if (rand > .96) {
+                btcprice *= 1.02
+              } else {
+                btcprice *= 1.01
+              }
+            } else {
+              btcprice *= 1.0005
+            }
+          } else {
+            btcprice *= 1.0029
+          }
+        } else {
+          if(rand < .1) {
+            if (rand < .02) {
+              btcprice *= 0.965
+            } else {
+              if (rand < .05) {
+                btcprice *= 0.98
+              } else {
+                btcprice *= .9975
+              }
+            }
+          } else {
+            if(Math.random > .5) {
+              btcprice *= .997
+            } else {
+              btcprice *= 0.9990
+            }
+          }
+        }
       }
        
        //console.log(btcprice);
-       $("#btcprice").text("₿ = $" + btcprice.toFixed(2));
+      $("#btcprice").text("₿ = $" + btcprice.toFixed(2));
      
-      if($("#adjustProfit").is(":checked") && days % 14 == 0) {
+      if($("#adjustProfit").is(":checked") ) {
         for(i in plansAvailable) {
-          plansAvailable[i]["profit"] = plansAvailable[i]["profit"].times(.981);
+          plansAvailable[i]["profit"] = plansAvailable[i]["profit"].times(1 - 0.004527678)
+          /*
+          if(!plansAvailable[i].hasOwnProperty("nextProfit")) {
+            plansAvailable[i]["nextProfit"] = new Big(plansAvailable[i]["profit"]);
+           
+          }
+          
+          plansAvailable[i]["nextProfit"] =  plansAvailable[i]["nextProfit"].times(1 - 0.4527678);
+          if(days % 14 == 0) {
+            plansAvailable[i]["profit"] = plansAvailable[i]["nextProfit"];
+          }
+          */
         }
       }
       
        
        a = Big(0.0);
+       
+       //
        var droppedPlans = 0;
         for(i in myPlans) {
           a = a.plus(plansAvailable[myPlans[i][0]]["profit"]);
@@ -190,9 +216,11 @@ $(document)
         var spent = 0;
         
         var buyPlan = function(p) {
-          console.log(plansAvailable[p]);
-          if (usd2btc(plansAvailable[p]["costUsd"]).lt(wallet)) {
+          //console.log(plansAvailable[p]);
+          if (plansAvailable.hasOwnProperty(p) && usd2btc(plansAvailable[p]["costUsd"]).lt(wallet)) {
             spent += plansAvailable[p]["costUsd"];
+            console.log("spent")
+            console.log(spent);
             newPlans++;
             
             
@@ -229,7 +257,7 @@ $(document)
        
         $("#addbtc").text("+ $" + btc2usd(a).toFixed(2) + " made");
         $("#minusbtc").text(" - $" + spent + " spent");
-        totalSpent += spent;
+        totalSpent += parseInt(spent);
         $("#totalSpent").text("Total Spent: $" + totalSpent);
         $("#made").text("profit = $" + btc2usd(a).minus(spent).toFixed(2));
         $("#day").text(days + " days");
@@ -265,23 +293,24 @@ $(document)
        
        $("#planimport").click(function () {
          var rawinput = $("#importdata").val();
-         var inputText = rawinput.slice(rawinput.lastIndexOf("Expiration") + 10, rawinput.length);
-         var rawPlans = inputText.split("\n");
+         var inputText = rawinput.slice(rawinput.lastIndexOf("My BTC Plans") + 10, rawinput.length);
+         var rawPlans = inputText.split("\n").slice(2);
       //   console.log(rawPlans);
          var newPlans = [];
          var reggy = /\d+d/
-         for(i in rawPlans) {
-           if(rawPlans[i].length > 5) {
+         for(i of rawPlans) {
+           if(i.includes("My Hashrange coin")) {
+             break;
+           }
+           if(i.length > 5) {
              //meh = rawPlans[i].split(" ");
-            blah = rawPlans[i].match(/(\d+)d/);
+             blah = i.match(/(\d+)d/);
              if(blah) {
-              // meh = wo.slice(0, 3);
-               words = rawPlans[i].split(" ");
+               words = i.split(" ");
                //console.log(blah);
                nameo = words[0].slice(0,3) + words[1].slice(0, 2);
                newPlans.push([nameo, blah.pop()]);
              }
-             
            }
          }
          myPlans = newPlans;
